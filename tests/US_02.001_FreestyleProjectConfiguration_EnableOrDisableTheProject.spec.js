@@ -51,4 +51,16 @@ test.describe("US_02.001 | Freestyle Project Configuration > Enable or Disable t
 
         expect(page).toHaveURL(`/job/${TestData.project.displayName}/configure`);
     });
+
+    test("TC_02.001.06 | Verify toggle switch label changes to Disabled when clicked", async ({ page }) => {
+        await page.getByRole('link', { name: `${TestData.project.displayName}`, exact: true }).focus();
+        await page.keyboard.press('Enter');
+        await page.waitForURL(`/job/${TestData.project.displayName}/`)
+        await page.getByRole("link", {name: `${TestData.dropdown.items[3]}`}).click();
+
+        await page.locator(".jenkins-toggle-switch").click();
+        const labelToggle = page.locator(".jenkins-toggle-switch__label");
+
+        await expect(labelToggle).toContainText(TestData.configuration.toggle.labels.disabled);
+    });
 });
