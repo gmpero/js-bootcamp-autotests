@@ -90,11 +90,18 @@ test.describe("US_02.001 | Freestyle Project Configuration > Enable or Disable t
         await US_02_001_Helper.disableProjectAndSave(page);
 
         await page.reload({ waitUntil: 'domcontentloaded' });
-        expect(page.locator("#enable-project")).toBeVisible();
+        await expect(page.locator("#enable-project")).toBeVisible();
     });
 
-    // TC_02.001.12 | Verify Enable button hides disabled message
+    
     // Проверить, что кнопка Enable скрывает сообщение об отключении
+    test("TC_02.001.12 | Verify Enable button hides disabled message", async ({ page }) => {
+        await US_02_001_Helper.openConfigurateProject(page);
+        await US_02_001_Helper.disableProjectAndSave(page);
+
+        await page.locator("button:has-text('Enable')").click();
+        await expect(page.locator("#enable-project")).not.toBeVisible();
+    });
 
     // TC_02.001.13 | Verify disabled project cannot be built manually
     // Проверить, что отключенный проект нельзя собрать вручную
