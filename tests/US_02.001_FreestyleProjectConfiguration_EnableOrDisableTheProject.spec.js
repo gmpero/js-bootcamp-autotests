@@ -93,8 +93,6 @@ test.describe("US_02.001 | Freestyle Project Configuration > Enable or Disable t
         await expect(page.locator("#enable-project")).toBeVisible();
     });
 
-    
-    // Проверить, что кнопка Enable скрывает сообщение об отключении
     test("TC_02.001.12 | Verify Enable button hides disabled message", async ({ page }) => {
         await US_02_001_Helper.openConfigurateProject(page);
         await US_02_001_Helper.disableProjectAndSave(page);
@@ -103,12 +101,22 @@ test.describe("US_02.001 | Freestyle Project Configuration > Enable or Disable t
         await expect(page.locator("#enable-project")).not.toBeVisible();
     });
 
-    // TC_02.001.13 | Verify disabled project cannot be built manually
-    // Проверить, что отключенный проект нельзя собрать вручную
+    test("TC_02.001.13 | Verify disabled project cannot be built manually", async ({ page }) => {
+        await US_02_001_Helper.openConfigurateProject(page);
+        await US_02_001_Helper.disableProjectAndSave(page);
 
-    // TC_02.001.14 | Verify Build Now option appears in project dropdown after enabling
+        await expect(page.locator("#tasks")).not.toContainText("Build Now");
+    });
+
     // Проверить, что опция Build Now появляется в выпадающем списке проекта после включения
+    test("TC_02.001.14 | Verify Build Now option appears in project dropdown after enabling", async ({ page }) => {
+        await US_02_001_Helper.openConfigurateProject(page);
+        await US_02_001_Helper.disableProjectAndSave(page);
 
-    // TC_02.001.15 | Verify Build Now section appears on project page after enabling
-    // Проверить, что появился блок Build Now на странице проекта после включения
+        await page.locator("button:has-text('Enable')").click();
+        await page.locator("#jenkins-head-icon").click();
+        await US_02_001_Helper.openProjectDropdown(page);
+
+        await expect(page.locator(".jenkins-dropdown button:has-text('Build Now')")).toBeEnabled();
+    });
 });
