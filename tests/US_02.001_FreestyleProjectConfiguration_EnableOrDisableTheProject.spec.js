@@ -27,7 +27,7 @@ test.describe("US_02.001 | Freestyle Project Configuration > Enable or Disable t
         await page.getByRole("link", { name: `${TestData.project.displayName}`, exact: true }).click();
         const configureButton = page.getByRole("link", {name: `${TestData.dropdown.items[3]}`});
 
-        expect(configureButton).toBeVisible();
+        await expect(configureButton).toBeVisible();
     });
 
     test("TC_02.001.04 | Verify configuration access via project dropdown menu", async ({ page }) => {
@@ -35,13 +35,13 @@ test.describe("US_02.001 | Freestyle Project Configuration > Enable or Disable t
         await page.locator(".jenkins-menu-dropdown-chevron").click();
         await page.getByRole("link", {name: `${TestData.dropdown.items[3]}`}).click();
 
-        expect(page).toHaveURL(`/job/${TestData.project.displayName}/configure`);
+        await expect(page).toHaveURL(`/job/${TestData.project.displayName}/configure`);
     });
 
     test("TC_02.001.05 | Verify configuration access via project name click", async ({ page }) => {
         await US_02_001_Helper.openConfigurateProject(page);
 
-        expect(page).toHaveURL(`/job/${TestData.project.displayName}/configure`);
+        await expect(page).toHaveURL(`/job/${TestData.project.displayName}/configure`);
     });
 
     test("TC_02.001.06 | Verify toggle switch label changes to Disabled when clicked", async ({ page }) => {
@@ -65,7 +65,7 @@ test.describe("US_02.001 | Freestyle Project Configuration > Enable or Disable t
         await page.locator(".jenkins-toggle-switch").click();
 
         await page.locator(".jenkins-submit-button").click();
-        expect(page.locator("#enable-project")).toContainText(TestData.status.disabled);
+        await expect(page.locator("#enable-project")).toContainText(TestData.status.disabled);
     });
 
     test("TC_02.001.09 | Verify Enable button becomes enabled after disabling project via toggle switch and saving", async ({page}) => {
@@ -73,6 +73,19 @@ test.describe("US_02.001 | Freestyle Project Configuration > Enable or Disable t
         await page.locator(".jenkins-toggle-switch").click();
 
         await page.locator('button:has-text("Save")').click();
-        expect(page.locator('button:has-text("Enable")')).toBeEnabled();
+        await expect(page.locator('button:has-text("Enable")')).toBeEnabled();
+    });
+
+    test("TC_02.001.10 | Verify disabled project icon has correct attributes and tooltip", async ({page}) => {
+        await US_02_001_Helper.openConfigurateProject(page);
+        await page.locator(".jenkins-toggle-switch").click();
+
+        await page.locator('button:has-text("Save")').click();
+        await page.locator('#jenkins-head-icon').click();
+
+        const iconDissabledProject =  page.locator("#job_TestFreestyleProject td.jenkins-table__icon svg").first()
+        await expect(iconDissabledProject).toHaveAttribute("tooltip", "Disabled");
+        await expect(iconDissabledProject).toHaveAttribute("title", "Disabled");
+        await expect(iconDissabledProject).toHaveAttribute("aria-hidden", "true");
     });
 });
