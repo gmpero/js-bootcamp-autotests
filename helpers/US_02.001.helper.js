@@ -21,4 +21,9 @@ export class US_02_001_Helper {
         await page.waitForURL(`/job/${TestData.project.displayName}/`)
         await page.getByRole("link", {name: `${TestData.dropdown.items[3]}`}).click();
     }
+
+    static async disableProjectAndSave(page) {
+        await page.locator(".jenkins-toggle-switch").click();
+        await page.locator('button:has-text("Save")').click();
+    }
 }
