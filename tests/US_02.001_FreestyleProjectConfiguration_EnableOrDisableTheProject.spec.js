@@ -59,4 +59,12 @@ test.describe("US_02.001 | Freestyle Project Configuration > Enable or Disable t
 
         await expect(labelToggle).toContainText(TestData.configuration.toggle.labels.enabled);
     });
+
+    test("TC_02.001.08 | Verify project status changes to disabled when toggle switch is turned off", async ({page}) => {
+        await US_02_001_Helper.openConfigurateProject(page);
+        await page.locator(".jenkins-toggle-switch").click();
+
+        await page.locator(".jenkins-submit-button").click();
+        expect(page.locator("#enable-project")).toContainText(TestData.status.disabled);
+    });
 });
