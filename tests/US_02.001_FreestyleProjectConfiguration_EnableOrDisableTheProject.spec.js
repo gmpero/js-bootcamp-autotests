@@ -67,4 +67,12 @@ test.describe("US_02.001 | Freestyle Project Configuration > Enable or Disable t
         await page.locator(".jenkins-submit-button").click();
         expect(page.locator("#enable-project")).toContainText(TestData.status.disabled);
     });
+
+    test("TC_02.001.09 | Verify Enable button becomes enabled after disabling project via toggle switch and saving", async ({page}) => {
+        await US_02_001_Helper.openConfigurateProject(page);
+        await page.locator(".jenkins-toggle-switch").click();
+
+        await page.locator('button:has-text("Save")').click();
+        expect(page.locator('button:has-text("Enable")')).toBeEnabled();
+    });
 });
