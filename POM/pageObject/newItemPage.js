@@ -1,18 +1,17 @@
 import ConfigureFreestileProject from "./configureFreestileProject";
+import Layout from './layout';
 
-class NewItemPage {
+class NewItemPage extends Layout {
         /**
 	 * @param {import('playwright').Page} page //дает понять, что мы работаем с Playwright, дает подсказки Playwright
 	 */
 
     constructor(page) {
-        this.page = page;
+        super(page);
     };
 
     getLocatorJenkinsInput = () => this.page.locator("#name");
 	getLocatorFreestyleProject = () => this.page.locator(".hudson_model_FreeStyleProject");
-        // getLocatorFreestyleProject = () => this.page.getByRole("radio", {name: "hudson.model.FreeStyleProject"})
-
     getLocatorOkButton = () => this.page.locator("#ok-button");
 
     async fillJenkinsInput (nameProject) {

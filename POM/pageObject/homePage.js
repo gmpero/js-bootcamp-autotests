@@ -1,12 +1,13 @@
 import NewItemPage from "./newItemPage";
+import Layout from './layout';
 
-class HomePage {
+class HomePage extends Layout {
     /**
 	 * @param {import('playwright').Page} page //дает понять, что мы работаем с Playwright, дает подсказки Playwright
 	 */
 
     constructor(page) {
-        this.page = page;
+        super(page);
     };
 
     getLocatorNewItem = () => this.page.locator("#side-panel a[href$='newJob']");
