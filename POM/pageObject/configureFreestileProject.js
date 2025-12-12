@@ -1,26 +1,20 @@
-import HomePage from "./homePage";
+import Layout from './layout';
 
-class ConfigureFreestileProject {
+class ConfigureFreestileProject extends Layout {
     /**
 	 * @param {import('playwright').Page} page //дает понять, что мы работаем с Playwright, дает подсказки Playwright
 	 */
 
     constructor(page) {
-        this.page = page;
+        super(page);
     }
 
     getLocatorSaveButton = () => this.page.getByRole("button", {name: "Submit"});
-    getLocatorJenkinsLogo = () => this.page.locator(".app-jenkins-logo");
-
-
+    
+    /* МЕТОД НЕ РЕАЛИЗОВАН*/
     async clickSaveButton () {
         await getLocatorSaveButton.click();
         // return this; - должен вернуть страницу проекта - доделать
-    }
-
-    async clickJenkinsLogo () {
-        await this.getLocatorJenkinsLogo().click();
-        return new HomePage(this.page);
     }
 };
 
