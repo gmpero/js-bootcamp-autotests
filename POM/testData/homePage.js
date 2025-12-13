@@ -6,7 +6,7 @@ const expectHomePage = {
 
     startBuildingSection : {
         title: "Start building your software project",
-        createJobName: "Create a job",
+        createJobNameLink: "Create a job",
     },
 
     distributedBuildSection : {
