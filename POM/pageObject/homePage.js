@@ -21,6 +21,11 @@ class HomePage extends Layout {
         await this.getLocatorNewItem().click();
         return new NewItemPage(this.page);
     }
+
+    async clickCreateJobLink() {
+        await this.getLocatorCreateJobLink().click();
+        return new NewItemPage(this.page);
+    }
 }
 
 export default HomePage;
