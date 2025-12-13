@@ -39,6 +39,11 @@ test.describe("US_01.001 | New Item > Create a new item", () => {
         expect(homePage.getLocatorStartBuildingTitle()).toHaveText(expectHomePage.startBuildingSection.title);
     });
 
+    test("TC_01.001.06 | Verify that home page displays correct 'Create Job Name' link", async ({page}) => {
+        const homePage = new HomePage(page);
+        expect(homePage.getLocatorCreateJobLink()).toHaveText(expectHomePage.startBuildingSection.createJobNameLink);
+    });
+
     // 4. Отображение пунктов списка, соответсие текста(1+3)
     
     // 5. Вынести футер в layout
