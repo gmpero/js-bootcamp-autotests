@@ -3,6 +3,7 @@ import { test } from "../../base.js";
 import HomePage from "../pageObject/homePage.js";
 import expectHomePage from "../testData/homePage";
 import { projectName } from "../testData/projectName.js";
+import { text } from "stream/consumers";
 
 
 test.describe("US_01.001 | New Item > Create a new item", () => {
@@ -22,15 +23,16 @@ test.describe("US_01.001 | New Item > Create a new item", () => {
         expect(homePage.getLocatorItemName()).toContainText(projectName);
     });
 
-    // Реализовать тесты на главную страницу
-    // 1. Отображение заголовка Welcome to Jenkins!
     test("TC_01.001.03 | Verify that home page displays correct welcome title", async ({page}) => {
         const homePage = new HomePage(page);
         expect(homePage.getLocatorWelcomeTitle()).toHaveText(expectHomePage.welcomeTitle);
     });
 
-    // 2. Отображение описания :
-    /* "This page is where your Jenkins jobs will be displayed. To get started, you can set up distributed builds or start building a software project." */
+    test("TC_01.001.04 | Verify that home page displays correct welcome description", async ({page}) => {
+        const homePage = new HomePage(page);
+        expect(homePage.getLocatorDescriptionForWelcomeTitle()).toHaveText(expectHomePage.descriptionForWelcomeTitle);
+    });
+
     // 3. Отображение заголовков h2
     // 4. Отображение пунктов списка, соответсие текста(1+3)
     
