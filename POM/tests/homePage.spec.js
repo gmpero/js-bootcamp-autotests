@@ -50,7 +50,10 @@ test.describe("US_01.001 | New Item > Create a new item", () => {
         await expect(page).toHaveURL(expectNewItemPage.url);
     });
 
-    // 3. Отображение заголовков h2
+    test("TC_01.001.08 | Verify that home page displays correct distributed build section title", async ({page}) => {
+        const homePage = new HomePage(page);
+        expect(homePage.getLocatorDistributedBuildTitle()).toHaveText(expectHomePage.distributedBuildSection.title);
+    });
     // 4. Отображение пунктов списка, соответсие текста(1+3)
     
     // 5. Вынести футер в layout
