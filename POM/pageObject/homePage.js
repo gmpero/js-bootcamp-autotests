@@ -14,6 +14,7 @@ class HomePage extends Layout {
     getLocatorItemName = () => this.page.locator("#job_New-Freestyle-project")
     getLocatorWelcomeTitle = () => this.page.locator(".empty-state-block h1");
     getLocatorDescriptionForWelcomeTitle = () => this.page.locator(".empty-state-block p");
+    getLocatorStartBuildingTitle = () => this.page.locator(".empty-state-section h2.h4").first();
 
     async clickNewItem() {
         await this.getLocatorNewItem().click();
