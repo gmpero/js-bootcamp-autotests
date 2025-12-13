@@ -54,7 +54,11 @@ test.describe("US_01.001 | New Item > Create a new item", () => {
         const homePage = new HomePage(page);
         expect(homePage.getLocatorDistributedBuildTitle()).toHaveText(expectHomePage.distributedBuildSection.title);
     });
-    // 4. Отображение пунктов списка, соответсие текста(1+3)
+
+    test("TC_01.001.9 | Verify distributed build section links", async ({page}) => {
+        const homePage = new HomePage(page);
+        expect(homePage.getLocatorDistributedBuildLinks()).toHaveText(expectHomePage.distributedBuildSection.getListNameDistributedBuildSectionLink());
+    });
     
     // 5. Вынести футер в layout
     // 6. Написание тестов на футер.

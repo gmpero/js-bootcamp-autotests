@@ -15,8 +15,14 @@ const expectHomePage = {
             setUpAnAgent : "Set up an agent",
             configureCloud : "Configure a cloud",
             learnMore : "Learn more about distributed builds",
-        }
+        },
+
+        getListNameDistributedBuildSectionLink : function() {
+            return Object.values(this.listDistributedBuildSectionLink);
+        },
     },
+
+    
 };
 
 export default expectHomePage;
