@@ -1,5 +1,6 @@
 import ConfigureFreestileProject from "./configureFreestileProject";
 import Layout from './layout';
+import globalData from "../testData/globalData";
 
 class NewItemPage extends Layout {
         /**
@@ -24,9 +25,16 @@ class NewItemPage extends Layout {
         return this;
     }
 
-    async clickOkButton () {
+    async clickOkButton (configurePageName) {
         await this.getLocatorOkButton().click();
-        return new ConfigureFreestileProject(this.page);
+
+        switch (configurePageName) {
+            case globalData.configurePageName.freestyleProject:
+                return new ConfigureFreestileProject(this.page);
+            default:
+                console.error("Введен некорректной параметр configurePageName в функции clickOkButton. Укажите конфигурационную страницу, на которую необходимо совершить переход!");
+                return;
+        }
     }
 }
 
