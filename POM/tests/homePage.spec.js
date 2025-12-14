@@ -3,7 +3,7 @@ import { test } from "../../base.js";
 import HomePage from "../pageObject/homePage.js";
 import expectHomePage from "../testData/homePage";
 import expectNewItemPage from "../testData/newItemPage.js";
-import { projectName } from "../testData/projectName.js";
+import globalData from "../testData/globalData.js";
 
 
 
@@ -16,12 +16,12 @@ test.describe("US_01.001 | New Item > Create a new item", () => {
     test("RF_01.001.02 | Verify new project creation", async ({ page }) => {
         const homePage = new HomePage(page);
         const newItemPage = await homePage.clickNewItem();
-        await newItemPage.fillJenkinsInput(projectName);
+        await newItemPage.fillJenkinsInput(globalData.projectFreestyleName);
         await newItemPage.clickFreestyleProject();
-        const configureFreestileProject = await newItemPage.clickOkButton();
+        const configureFreestileProject = await newItemPage.clickOkButton(globalData.configurePageName.freestyleProject);
         await configureFreestileProject.clickJenkinsLogo();
 
-        expect(homePage.getLocatorItemName()).toContainText(projectName);
+        expect(homePage.getLocatorItemName()).toContainText(globalData.projectFreestyleName);
     });
 
     test("TC_01.001.03 | Verify that home page displays correct welcome title", async ({page}) => {

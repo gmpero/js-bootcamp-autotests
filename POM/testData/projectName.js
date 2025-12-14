@@ -1,1 +1,0 @@
-export const projectName = "New-Freestyle-project";
